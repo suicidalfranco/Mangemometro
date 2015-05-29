@@ -104,3 +104,26 @@ void TIM3_IRQHandler(void)
     TIM_SetCompare1(TIM3, capture + CCR1_Val);
   }
 }
+
+//--------------------------------------------------------------------------------------
+
+/* Digital filter designed by mkfilter/mkshape/gencode   A.J. Fisher
+   Command line: /www/usr/fisher/helpers/mkfilter -Bu -Lp -o 2 -a 2.0000000000e-01 0.0000000000e+00 -l */
+   
+#define NZEROS 2
+#define NPOLES 2
+#define GAIN   4.840925170e+00
+
+static float xv[NZEROS+1], yv[NPOLES+1];
+
+static void filterloop()
+{
+	for (;;)
+      {
+		xv[0] = xv[1]; xv[1] = xv[2]; 
+        xv[2] = valore del mangemometro da filtrare / GAIN;
+        yv[0] = yv[1]; yv[1] = yv[2]; 
+        yv[2] =   (xv[0] + xv[2]) + 2 * xv[1] + ( -0.1958157127 * yv[0]) + (  0.3695273774 * yv[1]);
+        next output value = yv[2];
+      }
+}
