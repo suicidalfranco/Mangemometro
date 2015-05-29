@@ -121,9 +121,9 @@ static void filterloop()
 	for (;;)
       {
 		xv[0] = xv[1]; xv[1] = xv[2]; 
-        xv[2] = valore del mangemometro da filtrare / GAIN;
+        xv[2] = valore_del_mangemometro_da _filtrare / GAIN;
         yv[0] = yv[1]; yv[1] = yv[2]; 
         yv[2] =   (xv[0] + xv[2]) + 2 * xv[1] + ( -0.1958157127 * yv[0]) + (  0.3695273774 * yv[1]);
-        next output value = yv[2];
+        leggi_prossimo_valore_in_uscita = yv[2];
       }
 }
